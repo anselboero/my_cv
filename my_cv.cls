@@ -14,6 +14,8 @@
 \RequirePackage{listofitems}
 \RequirePackage{enumitem}
 \RequirePackage{hyperref}
+\RequirePackage{pgffor}
+\RequirePackage{xstring}
 
 %% Page Settings
 \setlength\columnsep{1cm}
@@ -69,28 +71,28 @@
 
 \newcommand*{\work}[4]
 {%
-    \subsection{#1} %
+    \subsection{#1}%
     \ifthenelse{\equal{#2}{}}
     {}
     {
         \textbf{#2}\\
-    } %
-    #3\\ %
-    \ifthenelse{{\equal{#4}{}}}
-    {}
-    {
-        \readlist\keywordlist{#4}
-        {
-            \foreachitem\word\in\keywordlist{\keyword{\word}}
-        }
-    }
+    }%
+    \\#3
+    \\#4
 }
 
-\newcommand*{\school}[3]
+\newcommand*{\school}[5]
 {%
     \subsection{#1} %
-    #2\\ %
-     #3
+    #2 \\
+    \textbf{{Focus}} #3
+    \ifthenelse{\equal{#4}{}}
+    {}
+    {
+        \\
+        \textbf{{Thesis}} #4 \\
+        \textbf{{Supervisor}} #5
+    }
 }
 
 \newcommand*{\titletext}[7]
@@ -104,10 +106,10 @@
     
     \begin{flushright}
     \vspace*{-0.1cm}    
-    {\ralewayextra Email} \textbf{#4}\\
-    {\ralewayextra Phone} \textbf{#5}\\
-    {\ralewayextra Github} \textbf{#6}\\
-    \ifthenelse{\equal{#7}{}}{}{{\ralewayextra Website} \textbf{#7}}%
+    {\ralewayextra} \textbf{#4}\\
+    {\ralewayextra} \textbf{#5}\\
+    \ifthenelse{\equal{#6}{}}{}{{\ralewayextra} \textbf{#6}}\\
+    \ifthenelse{\equal{#7}{}}{}{{\ralewayextra} \textbf{#7}}%
 
     \end{flushright}
     \end{multicols}
